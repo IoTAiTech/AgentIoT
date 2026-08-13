@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: MIT
 # Author: Dr. Babak Sarkhpour, with AI assistance
-# Version: 0.157.20 | Date: 2026-08-13
+# Version: 0.157.21 | Date: 2026-08-14
 
 """FastAPI application for the independent AgentIoT Dashboard baseline."""
 

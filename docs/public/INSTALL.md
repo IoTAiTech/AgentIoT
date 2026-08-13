@@ -2,7 +2,7 @@
 # Install guide
 
 Author: Dr. Babak Sarkhpour, with AI assistance  
-Version: 0.157.20 | Date: 2026-08-13  
+Version: 0.157.21 | Date: 2026-08-14  
 production_claim: false
 
 ## Requirements
@@ -40,7 +40,7 @@ The npm command is a thin wrapper around the same curl installer.
 ```bash
 git clone https://github.com/IoTAiTech/AgentIoT.git
 cd AgentIoT
-docker build -t agentiot-greenovax:0.157.20 -f docker/Dockerfile .
+docker build -t agentiot-greenovax:0.157.21 -f docker/Dockerfile .
 cp docker/compose.public.yaml docker-compose.yaml
 # edit environment values; never commit secrets
 docker compose up -d
@@ -49,7 +49,7 @@ docker compose up -d
 ARM64 source build:
 
 ```bash
-docker build --platform linux/arm64 -t agentiot-greenovax:0.157.20-arm64 -f docker/Dockerfile .
+docker build --platform linux/arm64 -t agentiot-greenovax:0.157.21-arm64 -f docker/Dockerfile .
 ```
 
 ## First sign-in
@@ -57,7 +57,7 @@ docker build --platform linux/arm64 -t agentiot-greenovax:0.157.20-arm64 -f dock
 1. Open the published HTTPS or HTTP URL for the box.
 2. Sign in with the administrator identity created at deploy time.
 3. Change the administrator password immediately.
-4. Confirm `/api/version` shows **0.157.20** on every box.
+4. Confirm `/api/version` shows **0.157.21** on every box.
 
 ## Same version on every box
 
@@ -68,5 +68,5 @@ reload the matching image. Do not mix tags.
 
 ```bash
 docker compose -f docker/compose.public.yaml down
-docker image rm agentiot-greenovax:0.157.20 agentiot-greenovax:0.157.20-arm64 || true
+docker image rm agentiot-greenovax:0.157.21 agentiot-greenovax:0.157.21-arm64 || true
 ```

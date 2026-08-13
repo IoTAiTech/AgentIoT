@@ -2,7 +2,7 @@
 # Development status
 
 Author: Dr. Babak Sarkhpour, with AI assistance  
-Version: 0.157.20 | Date: 2026-08-13  
+Version: 0.157.21 | Date: 2026-08-14  
 production_claim: false
 
 ## Current cut
@@ -10,7 +10,7 @@ production_claim: false
 | Field | Value |
 |---|---|
 | Product | AgentIoT Dashboard |
-| Version | 0.157.20 |
+| Version | 0.157.21 |
 | License | MIT |
 | Customer preview | yes |
 | Production claim | **false** |
@@ -26,6 +26,7 @@ production_claim: false
 ## What works in this cut
 
 - Operations cockpit with architecture and version identity
+- Professional agentic shell: Agent plane, dual company marks, operations rail
 - Sign-in required mode
 - Grounded assistant with Finding / Evidence / Agents / Next review / Approval
 - Local model route when a private Ollama-compatible host is configured

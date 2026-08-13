@@ -2,7 +2,7 @@
 # Packaging
 
 Author: Dr. Babak Sarkhpour, with AI assistance  
-Version: 0.157.20 | Date: 2026-08-13  
+Version: 0.157.21 | Date: 2026-08-14  
 production_claim: false
 
 ## Artifacts
@@ -29,10 +29,10 @@ session data are never part of this package.
 ## Build images
 
 ```bash
-docker build -t agentiot-greenovax:0.157.20 -f docker/Dockerfile .
-docker build --platform linux/arm64 -t agentiot-greenovax:0.157.20-arm64 -f docker/Dockerfile .
-docker save agentiot-greenovax:0.157.20 | gzip > dist/agentiot-greenovax-0.157.20-amd64.tar.gz
-docker save agentiot-greenovax:0.157.20-arm64 | gzip > dist/agentiot-greenovax-0.157.20-arm64.tar.gz
+docker build -t agentiot-greenovax:0.157.21 -f docker/Dockerfile .
+docker build --platform linux/arm64 -t agentiot-greenovax:0.157.21-arm64 -f docker/Dockerfile .
+docker save agentiot-greenovax:0.157.21 | gzip > dist/agentiot-greenovax-0.157.21-amd64.tar.gz
+docker save agentiot-greenovax:0.157.21-arm64 | gzip > dist/agentiot-greenovax-0.157.21-arm64.tar.gz
 ```
 
 Attach those files to a GitHub Release after the repository exists.

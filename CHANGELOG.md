@@ -2,8 +2,8 @@
 # Project: AgentIoT Dashboard
 # Customer: GreeNovaX
 # Contractor: IoT-AI.Tech
-# Version: 0.157.20
-# Date: 2026-08-13
+# Version: 0.157.21
+# Date: 2026-08-14
 # Language: English
 # License: MIT
 
@@ -12,6 +12,13 @@
 All notable changes follow Keep a Changelog and semantic versioning.
 
 ## [Unreleased]
+
+## [0.157.21] - 2026-08-14
+
+### Changed
+- Operations cockpit and sign-in use a professional agentic IoT shell:
+  design tokens, an Agent plane, a clearer assistant rail, and both
+  company marks on login.
 
 ### Added
 - Binding GitHub publication order for every coder: no contracts,

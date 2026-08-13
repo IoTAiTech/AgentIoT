@@ -1,5 +1,5 @@
 <!doctype html>
-<!-- SPDX-License-Identifier: MIT | Author: Dr. Babak Sarkhpour, with AI assistance | Version: 0.157.15 | Date: 2026-08-13 | Prepared for GreeNovaX by IoT-AI.Tech -->
+<!-- SPDX-License-Identifier: MIT | Author: Dr. Babak Sarkhpour, with AI assistance | Version: 0.157.21 | Date: 2026-08-14 | Prepared for GreeNovaX by IoT-AI.Tech -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -8,11 +8,28 @@
     <link rel="apple-touch-icon" href="/static/greenovax-logo.png">
     <title>{{PRODUCT_NAME}}</title>
     <style>
+      :root {
+        --shell-ink: #10241c;
+        --shell-muted: #5a6d66;
+        --shell-paper: #f3f7f5;
+        --shell-surface: #ffffff;
+        --shell-line: #d5e3dc;
+        --shell-green: #0d7651;
+        --shell-green-strong: #0b8f5a;
+        --shell-green-soft: #e7f6ef;
+        --shell-teal: #147a86;
+        --shell-amber: #b8860b;
+        --shell-shadow: 0 10px 28px rgba(16, 36, 28, 0.08);
+        color-scheme: light;
+      }
       body {
         margin: 0;
         font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-        color: #172026;
-        background: #f4f7f9;
+        color: #10241c;
+        background: #f3f7f5;
+        background-image:
+          radial-gradient(1200px 420px at 8% -10%, rgba(13, 118, 81, 0.10), transparent 55%),
+          radial-gradient(900px 380px at 100% 0%, rgba(20, 122, 134, 0.08), transparent 50%);
       }
       main {
         margin: 0;
@@ -51,8 +68,10 @@
       button.primary {
         border-color: #0d7651;
         background: #0d7651;
+        background-image: linear-gradient(180deg, #129266 0%, #0d7651 100%);
         color: #ffffff;
         font-weight: 700;
+        box-shadow: 0 1px 0 rgba(255,255,255,0.18) inset, 0 6px 14px rgba(13, 118, 81, 0.22);
       }
       button.icon-button {
         align-items: center;
@@ -678,11 +697,11 @@
           "sidebar footer footer";
         grid-template-columns: 244px minmax(0, 1fr) 334px;
         grid-template-rows: 74px minmax(0, 1fr) 44px;
-        background: #f6f8fa;
+        background: transparent;
         border: 0;
         border-radius: 0;
         overflow: hidden;
-        color: #111827;
+        color: var(--shell-ink);
       }
       .dashboard-shell[data-rail-mode="none"] {
         grid-template-areas:
@@ -700,20 +719,66 @@
         flex-direction: column;
         grid-area: sidebar;
         grid-row: 1 / 4;
-        border-right: 1px solid #d8e2e7;
-        background: #ffffff;
+        border-right: 1px solid var(--shell-line);
+        background:
+          linear-gradient(180deg, #ffffff 0%, #f7fbf9 100%);
         min-height: 0;
         overflow: auto;
         padding: 16px 14px 12px;
       }
       .shell-logo {
         align-items: center;
-        border-bottom: 1px solid #e2e8ec;
+        border-bottom: 1px solid var(--shell-line);
         display: flex;
         height: 74px;
         justify-content: center;
         margin: -16px -14px 10px;
         padding: 0 12px;
+        background: linear-gradient(180deg, #ffffff, #f3faf6);
+      }
+      .shell-agent-mesh {
+        background: #0f2a22;
+        border-radius: 12px;
+        color: #d7eee4;
+        margin: 0 0 12px;
+        padding: 10px 10px 8px;
+      }
+      .shell-agent-mesh-title {
+        color: #8fbfaa;
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        margin: 0 0 8px;
+        text-transform: uppercase;
+      }
+      .shell-agent-mesh ul {
+        display: grid;
+        gap: 5px;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+      .shell-agent-mesh li {
+        align-items: center;
+        display: flex;
+        font-size: 11px;
+        font-weight: 700;
+        gap: 7px;
+      }
+      .shell-agent-mesh i {
+        background: #3d6b5c;
+        border-radius: 50%;
+        box-shadow: 0 0 0 3px rgba(18, 167, 111, 0.12);
+        display: inline-block;
+        height: 7px;
+        width: 7px;
+      }
+      .shell-agent-mesh li[data-state="live"] i {
+        background: #27d18a;
+        box-shadow: 0 0 0 4px rgba(39, 209, 138, 0.18);
+      }
+      .shell-agent-mesh li[data-state="review"] i {
+        background: #e3b341;
       }
       .shell-logo img {
         border-radius: 0;
@@ -815,15 +880,16 @@
       }
       .shell-nav a.active,
       .shell-nav a:hover {
-        background: #e9f4ef;
+        background: #e7f6ef;
         box-shadow: inset 4px 0 0 #12a76f;
         color: #0b6a45;
         font-weight: 700;
       }
       .shell-topbar {
         align-items: center;
-        background: #ffffff;
-        border-bottom: 1px solid #d8e2e7;
+        background: rgba(255, 255, 255, 0.88);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--shell-line);
         display: flex;
         grid-area: topbar;
         justify-content: space-between;
@@ -1222,9 +1288,9 @@
       .shell-panel,
       .shell-side-panel {
         background: #ffffff;
-        border: 1px solid #dfe7eb;
-        border-radius: 8px;
-        box-shadow: 0 8px 24px rgba(24, 38, 50, 0.04);
+        border: 1px solid #d5e3dc;
+        border-radius: 12px;
+        box-shadow: 0 10px 28px rgba(16, 36, 28, 0.06);
       }
       .shell-kpi {
         display: grid;
@@ -2644,8 +2710,9 @@
         box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.6);
       }
       .shell-rail {
-        background: #f8fafb;
-        border-left: 1px solid #d8e2e7;
+        background:
+          linear-gradient(180deg, #f4fbf8 0%, #f7fafb 36%, #f8fafb 100%);
+        border-left: 1px solid var(--shell-line);
         display: grid;
         gap: 14px;
         grid-area: rail;
@@ -2761,8 +2828,9 @@
       .assistant-card {
         background: #f6faf8;
         border: 1px solid #d5e4db;
-        border-left: 4px solid #0d7651;
-        border-radius: 8px;
+        border-left: 4px solid var(--shell-green);
+        border-radius: 12px;
+        box-shadow: var(--shell-shadow);
         color: #1c2a31;
         font-size: 13.5px;
         line-height: 1.5;
@@ -2789,6 +2857,12 @@
       }
       .assistant-head h2 {
         margin: 0;
+      }
+      .assistant-plane-caption {
+        color: var(--shell-muted);
+        font-size: 12px;
+        line-height: 1.4;
+        margin: 6px 0 0;
       }
       .assistant-state-pill {
         border-radius: 999px;
@@ -2969,12 +3043,17 @@
       }
       .assistant-activity {
         margin: 8px 0 0;
-        padding-left: 1.2em;
+        padding-left: 0;
         color: var(--muted, #445);
         font-size: 0.92em;
+        list-style: none;
       }
       .assistant-activity li {
-        margin: 0.2em 0;
+        background: #ffffff;
+        border: 1px solid #dce8e2;
+        border-radius: 8px;
+        margin: 0.35em 0;
+        padding: 6px 8px;
       }
       .shell-footer-chip[data-state="partial"] {
         background: #fff1cc;
@@ -3130,6 +3209,9 @@
           z-index: 30;
         }
         .shell-sidebar .shell-logo {
+          display: none;
+        }
+        .shell-agent-mesh {
           display: none;
         }
         .shell-nav {
@@ -3589,6 +3671,15 @@
           <div class="shell-logo">
             <img src="/static/greenovax-logo-horizontal.png" alt="GreeNovaX logo">
           </div>
+          <div class="shell-agent-mesh" aria-label="Agent control plane">
+            <p class="shell-agent-mesh-title">Agent plane</p>
+            <ul>
+              <li data-state="live"><i></i>Operations coordinator</li>
+              <li data-state="live"><i></i>Diagnosis agent</li>
+              <li data-state="review"><i></i>Recovery proposer</li>
+              <li><i></i>Grounding / RAG</li>
+            </ul>
+          </div>
           <nav class="shell-nav" aria-label="Primary dashboard navigation">
             <div class="shell-primary-nav">
               <a class="active" href="#dashboard-shell" aria-current="page"><span class="shell-nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></span>Cockpit</a>
@@ -3628,7 +3719,7 @@
         <header class="shell-topbar">
           <div class="shell-title">
             <h1>{{PRODUCT_NAME}}</h1>
-            <p>Prepared for {{CUSTOMER_NAME}} by {{CONTRACTOR_NAME}}</p>
+            <p>Agentic IoT operations · Prepared for {{CUSTOMER_NAME}} by {{CONTRACTOR_NAME}}</p>
           </div>
           <div class="shell-tools shell-top-actions">
             <button id="shell-system-state" class="shell-pill shell-pill-action" type="button" data-open-operational-form="shell-asset-form" aria-label="Connect first device">Connect first device</button>
@@ -4940,6 +5031,7 @@
               <h2>AI Assistant</h2>
               <span class="assistant-state-pill" id="shell-assistant-state" data-mode="checking">Checking</span>
             </div>
+            <p class="assistant-plane-caption">Grounded agents prepare Finding, Evidence, and Approval. Recovery stays human-approved.</p>
             <p class="assistant-route" id="shell-assistant-route-label">Checking the local model host…</p>
             <div class="assistant-route-card" id="shell-assistant-blocked" hidden>
               <p id="shell-assistant-block-reason">The live model has not answered this turn. The evidence review below is still valid.</p>
@@ -8433,7 +8525,7 @@
           blocked
             ? text
             : (confidence === 'low_no_runtime_records'
-              ? text
+            ? text
               : customerSafeAssistantText((answer || {}).answer || text))
         );
       }

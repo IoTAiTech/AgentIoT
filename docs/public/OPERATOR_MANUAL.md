@@ -2,7 +2,7 @@
 # Operator manual
 
 Author: Dr. Babak Sarkhpour, with AI assistance  
-Version: 0.157.20 | Date: 2026-08-13  
+Version: 0.157.21 | Date: 2026-08-14  
 production_claim: false
 
 ## What this product is
@@ -18,7 +18,7 @@ Use the Sign In page. Change the initial administrator password on first use.
 
 ## Cockpit identity
 
-The heading shows architecture (`x86` or `ARM`) and version (`v0.157.20`).
+The heading shows architecture (`x86` or `ARM`) and version (`v0.157.21`).
 Both boxes in a pair must show the same version.
 
 ## Daily work

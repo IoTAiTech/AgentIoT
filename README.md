@@ -7,7 +7,7 @@
   <img src="docs/brand/iot-ai-tech-company-logo.png" alt="IoT-AI.Tech" height="56">
 </p>
 
-> Version **0.157.20** · License **MIT** · Prepared for **GreeNovaX** by **IoT-AI.Tech**  
+> Version **0.157.21** · License **MIT** · Prepared for **GreeNovaX** by **IoT-AI.Tech**  
 > Status: development preview · `production_claim: false`
 
 **AgentIoT Dashboard** is an AI-powered, fault-tolerant IoT monitoring
@@ -93,7 +93,7 @@ npx agentiot-greenovax-install
 ### Docker from this tree
 
 ```bash
-docker build -t agentiot-greenovax:0.157.20 -f docker/Dockerfile .
+docker build -t agentiot-greenovax:0.157.21 -f docker/Dockerfile .
 docker compose -f docker/compose.public.yaml up -d
 ```
 

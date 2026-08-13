@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 # SPDX-License-Identifier: MIT
 # Author: Dr. Babak Sarkhpour, with AI assistance
-# Version: 0.157.20 | Date: 2026-08-13
+# Version: 0.157.21 | Date: 2026-08-14
 # Public box installer for x86_64 and aarch64. No private documents.
 set -euo pipefail
 
-VERSION="${AGENTIOT_VERSION:-0.157.20}"
+VERSION="${AGENTIOT_VERSION:-0.157.21}"
 GITHUB_REPO="${GITHUB_REPO:-IoTAiTech/AgentIoT}"
 IMAGE_NAME="${AGENTIOT_IMAGE_NAME:-agentiot-greenovax}"
 INSTALL_DIR="${AGENTIOT_INSTALL_DIR:-${PWD}/agentiot-greenovax}"

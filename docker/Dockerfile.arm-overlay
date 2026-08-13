@@ -1,0 +1,9 @@
+# SPDX-License-Identifier: MIT
+# Author: Dr. Babak Sarkhpour, with AI assistance
+# Version: 0.157.20 | Date: 2026-08-13
+# Overlay current source onto the last ARM64 runtime image.
+FROM agentiot-greenovax:0.157.17-arm64
+USER root
+COPY --chown=agentiot:agentiot src ./src
+COPY --chown=agentiot:agentiot VERSION CHANGELOG.md README.en.md README.de.md ./
+USER agentiot

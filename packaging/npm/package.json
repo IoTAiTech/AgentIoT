@@ -1,0 +1,16 @@
+{
+  "name": "agentiot-greenovax-install",
+  "version": "0.157.20",
+  "description": "Thin installer wrapper for the public AgentIoT / GreeNovaX dashboard. No private documents.",
+  "license": "MIT",
+  "bin": {
+    "agentiot-install": "bin/agentiot-install.js"
+  },
+  "files": [
+    "bin/agentiot-install.js",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=18"
+  }
+}

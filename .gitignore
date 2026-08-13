@@ -1,0 +1,12 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.env
+*.pem
+id_rsa
+id_ed25519
+github_deploy_ed25519
+dist/
+output/
+*.sqlite

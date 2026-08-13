@@ -1,0 +1,110 @@
+<!-- SPDX-License-Identifier: MIT -->
+<!-- Author: Dr. Babak Sarkhpour, with AI assistance -->
+<!-- Version: 0.157.15 | Date: 2026-08-13 -->
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="/static/greenovax-logo.png">
+    <title>Sign In | {{PRODUCT_NAME}}</title>
+    <style>
+      :root { color-scheme: light; font-family: Arial, sans-serif; color: #17252c; background: #edf2f3; }
+      * { box-sizing: border-box; }
+      body { margin: 0; min-height: 100vh; display: grid; grid-template-rows: 1fr auto; }
+      main { display: grid; place-items: center; padding: 32px 20px; }
+      .login { width: min(420px, 100%); border: 1px solid #d2dcdf; border-radius: 8px; background: #fff; padding: 28px; box-shadow: 0 18px 48px rgba(31, 52, 61, .12); }
+      .brand { display: flex; align-items: center; gap: 14px; margin-bottom: 26px; }
+      .brand img { width: 112px; height: auto; }
+      .brand div { border-left: 1px solid #dce4e6; padding-left: 14px; }
+      h1 { font-size: 20px; margin: 0 0 4px; }
+      p { color: #52646c; font-size: 14px; margin: 0; }
+      form { display: grid; gap: 16px; }
+      label { display: grid; gap: 7px; font-size: 13px; font-weight: 700; }
+      input { width: 100%; border: 1px solid #bcc9cd; border-radius: 6px; padding: 11px 12px; font: inherit; }
+      input:focus { border-color: #006f49; outline: 3px solid rgba(0, 111, 73, .15); }
+      button { border: 0; border-radius: 6px; background: #006f49; color: #fff; cursor: pointer; font: inherit; font-weight: 700; padding: 12px; }
+      button:disabled { cursor: wait; opacity: .65; }
+      .status { min-height: 20px; color: #a32b2b; font-size: 13px; }
+      footer { border-top: 1px solid #d4dee1; color: #52646c; font-size: 12px; padding: 16px 20px; text-align: center; }
+      .identity { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+      .identity span { background: #eef5f2; border-radius: 999px; color: #0b6a45; font-size: 11px; font-weight: 800; padding: 3px 8px; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section class="login" aria-labelledby="login-title">
+        <div class="brand">
+          <img src="/static/greenovax-logo.png" alt="GreeNovaX logo">
+          <div><h1 id="login-title">{{PRODUCT_NAME}}</h1><p>Operations access</p>
+            <div class="identity"><span>Version {{VERSION}}</span><span id="login-arch-badge">{{ARCH_SIGN}}</span><span id="login-hardware-tech">{{HARDWARE_TECH}}</span></div>
+          </div>
+        </div>
+        <form id="login-form">
+          <label>Username
+            <input name="username" autocomplete="username" value="admin" required autofocus>
+          </label>
+          <label>Password
+            <input name="password" type="password" autocomplete="current-password" required>
+          </label>
+          <button type="submit">Sign In</button>
+          <p id="login-status" class="status" role="alert" aria-live="polite"></p>
+        </form>
+      </section>
+    </main>
+    <footer>&copy; {{RELEASE_YEAR}} GreeNovaX · Prepared for GreeNovaX by IoT-AI.Tech · Version {{VERSION}} · {{ARCH_SIGN}} · {{HARDWARE_TECH}}</footer>
+    <script>
+      const form = document.getElementById('login-form');
+      const status = document.getElementById('login-status');
+      function safeLocalDestination(candidate) {
+        if (
+          typeof candidate !== 'string' ||
+          !candidate.startsWith('/') ||
+          candidate.startsWith('//') ||
+          candidate.includes('\\') ||
+          /[\u0000-\u001f\u007f]/.test(candidate) ||
+          /%(?:2f|5c)/i.test(candidate)
+        ) return '/dashboard';
+        try {
+          const parsed = new URL(candidate, window.location.origin);
+          if (parsed.origin !== window.location.origin || !parsed.pathname.startsWith('/')) {
+            return '/dashboard';
+          }
+          return `${parsed.pathname}${parsed.search}${parsed.hash}`;
+        } catch (error) {
+          return '/dashboard';
+        }
+      }
+      form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const button = form.querySelector('button');
+        button.disabled = true;
+        status.textContent = 'Signing in...';
+        const payload = Object.fromEntries(new FormData(form).entries());
+        try {
+          const response = await fetch('/api/auth/login', {
+            method: 'POST',
+            credentials: 'same-origin',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+          const text = await response.text();
+          let result = {};
+          try {
+            result = text ? JSON.parse(text) : {};
+          } catch (parseError) {
+            result = {};
+          }
+          if (!response.ok) throw new Error(result.detail || 'Sign-in failed');
+          const requested = new URLSearchParams(window.location.search).get('next') || '/dashboard';
+          const safeRequested = safeLocalDestination(requested);
+          const destination = result.password_change_required ? '/login/change-password' : safeRequested;
+          window.location.assign(destination);
+        } catch (error) {
+          status.textContent = error.message;
+          button.disabled = false;
+        }
+      });
+    </script>
+  </body>
+</html>

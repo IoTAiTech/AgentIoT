@@ -1,0 +1,35 @@
+# SPDX-License-Identifier: MIT
+# Author: Dr. Babak Sarkhpour, with AI assistance
+# Version: 0.157.20 | Date: 2026-08-13
+# Public compose file. No fleet addresses. No secrets.
+# production_claim: false
+
+services:
+  agentiot:
+    image: ${AGENTIOT_IMAGE:-agentiot-greenovax:0.157.20}
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.public
+    ports:
+      - "127.0.0.1:8080:8080"
+    environment:
+      AGENTIOT_ENV: "${AGENTIOT_ENV:-development}"
+      AGENTIOT_TENANT_ID: "${AGENTIOT_TENANT_ID:-local}"
+      AGENTIOT_DB_PATH: "/app/data/agentiot.db"
+      AGENTIOT_AI_LOCAL_MODEL: "${AGENTIOT_AI_LOCAL_MODEL:-}"
+      AGENTIOT_OLLAMA_PRIMARY_URL: "${AGENTIOT_OLLAMA_PRIMARY_URL:-http://ollama.example.internal:11434}"
+      AGENTIOT_OLLAMA_SECONDARY_URL: "${AGENTIOT_OLLAMA_SECONDARY_URL:-}"
+      AGENTIOT_REQUIRE_BROWSER_LOGIN: "${AGENTIOT_REQUIRE_BROWSER_LOGIN:-1}"
+    volumes:
+      - agentiot_data:/app/data
+    read_only: true
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,size=64m
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    restart: unless-stopped
+
+volumes:
+  agentiot_data:

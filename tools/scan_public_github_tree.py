@@ -115,6 +115,15 @@ def _rel(root: Path, path: Path) -> str:
     return path.relative_to(root).as_posix()
 
 
+def _iter_files(root: Path):
+    for path in root.rglob("*"):
+        if not path.is_file():
+            continue
+        if any(part == ".git" for part in path.parts):
+            continue
+        yield path
+
+
 def _is_text(path: Path) -> bool:
     if path.suffix.lower() in TEXT_SUFFIXES:
         return True
@@ -123,9 +132,7 @@ def _is_text(path: Path) -> bool:
 
 def find_path_violations(root: Path) -> list[str]:
     hits: list[str] = []
-    for path in root.rglob("*"):
-        if not path.is_file():
-            continue
+    for path in _iter_files(root):
         rel = _rel(root, path)
         lowered = rel.lower()
         for part in DENY_PATH_PARTS:
@@ -144,8 +151,8 @@ def find_path_violations(root: Path) -> list[str]:
 
 def find_content_violations(root: Path) -> list[str]:
     hits: list[str] = []
-    for path in root.rglob("*"):
-        if not path.is_file() or not _is_text(path):
+    for path in _iter_files(root):
+        if not _is_text(path):
             continue
         try:
             text = path.read_text(encoding="utf-8", errors="replace")
@@ -169,8 +176,8 @@ def find_content_violations(root: Path) -> list[str]:
 
 def sanitize_tree(root: Path) -> int:
     changed = 0
-    for path in root.rglob("*"):
-        if not path.is_file() or not _is_text(path):
+    for path in _iter_files(root):
+        if not _is_text(path):
             continue
         original = path.read_text(encoding="utf-8", errors="replace")
         updated = original
@@ -185,7 +192,7 @@ def sanitize_tree(root: Path) -> int:
 def scan(root: Path) -> dict[str, object]:
     path_hits = find_path_violations(root)
     content_hits = find_content_violations(root)
-    files = [p for p in root.rglob("*") if p.is_file()]
+    files = list(_iter_files(root))
     return {
         "root": str(root),
         "file_count": len(files),
